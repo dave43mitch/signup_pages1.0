@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lions Crab Feed</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+  <!-- Replace YOUR_PAYPAL_CLIENT_ID with your real sandbox or live client id -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD&intent=capture&disable-funding=paylater"></script>
+</head>
+<body>
+  <div id="appShell">
+    <form id="form">
+      <input type="number" id="memMeal" name="memMeal" style="display:none">
+      <input type="number" id="nGuests" name="nGuests" style="display:none">
+      <input type="number" id="index" name="index" style="display:none">
+      <input type="text" id="comments" name="comments" style="display:none">
+      <input type="text" id="choice" name="choice" style="display:none">
+
+      <section id="pageWebOpen" style="display:none">
+        <div class="page-card">
+          <div class="hero-header">
+            <img id="logo1" width="75" height="75" alt="Logo">
+            <h3 id="titleText"></h3>
+          </div>
+
+          <div class="mt-4">
+            <p id="row5"></p>
+            <p id="row6"></p>
+            <p id="row7"></p>
+            <p id="row8"></p>
+            <p id="row9"></p>
+            <p id="row10"></p>
+            <p id="row11"></p>
+            <p id="row12"></p>
+            <p id="row13"></p>
+            <p id="row14"></p>
+            <p id="row15"></p>
+            <p id="row16"></p>
+
+            <button type="button" id="btnSignup" class="btn btn-primary" onclick="openPageEmail()">
+              Signup
+            </button>
+
+            <button type="button" id="btnSignupClosed" class="btn btn-info" style="display:none" onclick="openRegClosed()">
+              SIGNUPS CLOSED
+            </button>
+
+            <button type="button" class="btn btn-primary" onclick="viewSignups()">
+              VIEW SIGNUPS
+            </button>
+
+            <p id="row17"></p>
+            <p id="row18"></p>
+            <p id="row19"></p>
+            <p id="row20"></p>
+            <p id="row21"></p>
+            <p id="row22"></p>
+            <p id="row24"></p>
+            <p id="row25"></p>
+            <p id="row26"></p>
+            <p id="row27"></p>
+          </div>
+        </div>
+      </section>
+
+      <div id="pageEmail"
+           class="form-style-9"
+           style="position:relative; margin-bottom:25px; margin-top:25px; display:none">
+
+        <button type="button"
+                class="close-btn"
+                onclick="backPageEmail()"
+                aria-label="Close">&times;</button>
+
+        <div class="center">
+          <h3>Member Login</h3>
+          <br>
+          <h5>Enter your email address</h5>
+          <br>
+
+          <input type="email"
+                 class="tbx"
+                 id="email"
+                 name="email"
+                 placeholder="your email">
+
+          <button type="button"
+                  class="btn btn-primary"
+                  onclick="nextPageEmail()">
+            Continue &raquo;
+          </button>
+        </div>
+      </div>
+
+      <div id="pageChoice"
+           class="form-style-9"
+           style="position:relative; margin-bottom:25px; margin-top:25px; display:none">
+
+        <button type="button"
+                class="close-btn"
+                onclick="backPageChoice()"
+                aria-label="Close">&times;</button>
+
+        <div class="center">
+          <h5 id="choiceTitle"></h5>
+          <br>
+
+          <div class="radio-button lbx">
+            <input type="radio" id="mchoice1" name="mchoice">
+            <label class="lbx" for="mchoice1" id="mlabel1"></label><br>
+
+            <input type="radio" id="mchoice2" name="mchoice">
+            <label class="lbx" for="mchoice2" id="mlabel2"></label><br>
+
+            <input type="radio" id="mchoice3" name="mchoice">
+            <label class="lbx" for="mchoice3" id="mlabel3"></label>
+          </div>
+
+          <button type="button" class="btn btn-primary" onclick="nextPageChoice()">Next &raquo;</button>
+        </div>
+      </div>
+
+      <div id="pageGuest1"
+           class="form-style-9"
+           style="position:relative; margin-bottom:25px; margin-top:25px; display:none">
+
+        <button type="button"
+                class="close-btn"
+                onclick="backPageGuest()"
+                aria-label="Close">&times;</button>
+
+        <div class="center">
+          <h5>GUEST 1</h5>
+          <br>
+
+          <input type="text" class="tbx" id="g1name" name="g1name" placeholder="Name">
+
+          <div id="g1Choices" class="radio-button lbx">
+            <input type="radio" id="g1choice1" name="g1choice" value="g1choice1">
+            <label class="lbx" for="g1choice1" id="g1label1"></label><br>
+
+            <input type="radio" id="g1choice2" name="g1choice" value="g1choice2">
+            <label class="lbx" for="g1choice2" id="g1label2"></label><br>
+
+            <input type="radio" id="g1choice3" name="g1choice" value="g1choice3">
+            <label class="lbx" for="g1choice3" id="g1label3"></label>
+          </div>
+
+          <br>
+
+          <input type="text" class="tbx" id="g1comment" name="g1comment" placeholder="Any Comment?">
+
+          <button type="button" class="btn btn-primary" onclick="nextPageGuest()">Next &raquo;</button>
+        </div>
+      </div>
+
+      <div id="pageGuest2"
+           class="form-style-9"
+           style="position:relative; margin-bottom:25px; margin-top:25px; display:none">
+
+        <button type="button"
+                class="close-btn"
+                onclick="backPageGuest()"
+                aria-label="Close">&times;</button>
+
+        <div class="center">
+          <h5>GUEST 2</h5>
+          <br>
+
+          <input type="text" class="tbx" id="g2name" name="g2name" placeholder="Name">
+
+          <div id="g2Choices" class="radio-button lbx">
+            <input type="radio" id="g2choice1" name="g2choice" value="g2choice1">
+            <label class="lbx" for="g2choice1" id="g2label1"></label><br>
+
+            <input type="radio" id="g2choice2" name="g2choice" value="g2choice2">
+            <label class="lbx" for="g2choice2" id="g2label2"></label><br>
+
+            <input type="radio" id="g2choice3" name="g2choice" value="g2choice3">
+            <label class="lbx" for="g2choice3" id="g2label3"></label>
+          </div>
+
+          <br>
+
+          <input type="text" class="tbx" id="g2comment" name="g2comment" placeholder="Any Comment?">
+
+          <button type="button" class="btn btn-primary" onclick="nextPageGuest()">Next &raquo;</button>
+        </div>
+      </div>
+
+      <div id="pageGuest3"
+           class="form-style-9"
+           style="position:relative; margin-bottom:25px; margin-top:25px; display:none">
+
+        <button type="button"
+                class="close-btn"
+                onclick="backPageGuest()"
+                aria-label="Close">&times;</button>
+
+        <div class="center">
+          <h5>GUEST 3</h5>
+          <br>
+
+          <input type="text" class="tbx" id="g3name" name="g3name" placeholder="Name">
+
+          <div id="g3Choices" class="radio-button lbx">
+            <input type="radio" id="g3choice1" name="g3choice" value="g3choice1">
+            <label class="lbx" for="g3choice1" id="g3label1"></label><br>
+
+            <input type="radio" id="g3choice2" name="g3choice" value="g3choice2">
+            <label class="lbx" for="g3choice2" id="g3label2"></label><br>
+
+            <input type="radio" id="g3choice3" name="g3choice" value="g3choice3">
+            <label class="lbx" for="g3choice3" id="g3label3"></label>
+          </div>
+
+          <br>
+
+          <input type="text" class="tbx" id="g3comment" name="g3comment" placeholder="Any Comment?">
+
+          <button type="button" class="btn btn-primary" onclick="nextPageGuest()">Next &raquo;</button>
+        </div>
+      </div>
+
+      <div id="pageGuest4"
+           class="form-style-9"
+           style="position:relative; margin-bottom:25px; margin-top:25px; display:none">
+
+        <button type="button"
+                class="close-btn"
+                onclick="backPageGuest()"
+                aria-label="Close">&times;</button>
+
+        <div class="center">
+          <h5>GUEST 4</h5>
+          <br>
+
+          <input type="text" class="tbx" id="g4name" name="g4name" placeholder="Name">
+
+          <div id="g4Choices" class="radio-button lbx">
+            <input type="radio" id="g4choice1" name="g4choice" value="g4choice1">
+            <label class="lbx" for="g4choice1" id="g4label1"></label><br>
+
+            <input type="radio" id="g4choice2" name="g4choice" value="g4choice2">
+            <label class="lbx" for="g4choice2" id="g4label2"></label><br>
+
+            <input type="radio" id="g4choice3" name="g4choice" value="g4choice3">
+            <label class="lbx" for="g4choice3" id="g4label3"></label>
+          </div>
+
+          <br>
+
+          <input type="text" class="tbx" id="g4comment" name="g4comment" placeholder="Any Comment?">
+
+          <button type="button" class="btn btn-primary" onclick="nextPageGuest()">Next &raquo;</button>
+        </div>
+      </div>
+
+      <div id="pageClosed"
+           class="form-style-9 center"
+           style="display:none; margin-bottom:25px; margin-top:25px">
+        <h4>Signup is now Closed for the</h4>
+        <h4><span id="date2"></span> meeting.</h4>
+        <h4>Please check back for signup for the next meeting</h4>
+      </div>
+    </form>
+
+    <section id="pageSignups" class="signup-container" style="display:none">
+      <button type="button" class="close-btn" onclick="btn1PageSignups()" aria-label="Close">&times;</button>
+      <div class="signup-header mb-3">
+        <h5>Current Signups</h5>
+        <h5>Total: <span id="signupTotal"></span></h5>
+      </div>
+      <div class="signup-table">
+        <table id="signupsTable" class="table table-striped table-sm table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Guests</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pagePaypal" style="display:none">
+      <div class="form-style-9" style="position:relative">
+        <button type="button"
+                class="close-btn"
+                onclick="backPayPal()"
+                aria-label="Close">&times;</button>
+
+        <h5><span id="name1"></span> Click on one of the buttons below to select your payment method</h5>
+        <br>
+
+        <div id="paypal-button-container"></div>
+
+        <div id="paypalDebug"
+             style="margin-top:12px; padding:10px; font-size:14px; text-align:left; background:#f8f9fa; border:1px solid #ccc; border-radius:6px; white-space:pre-wrap;">
+          PayPal debug log will appear here.
+        </div>
+      </div>
+    </section>
+
+    <section id="pageThank" style="display:none">
+      <div class="form-style-9" style="margin-bottom:20px">
+        <h5>
+          Thank you <span id="name2"></span> for signing up.
+          <br>
+          Your signup has been recorded.
+        </h5>
+        <br>
+        <h5 id="thankMessage" style="white-space:pre-wrap"></h5>
+        <br>
+        <button type="button" class="btn btn-primary" onclick="showPage('pageWebOpen')">CLOSE / BACK</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="fixed-bottom">© d.mitchell</div>
+
+  <script src="app.js"></script>
+  <script src="paypal.js"></script>
+</body>
+</html>
